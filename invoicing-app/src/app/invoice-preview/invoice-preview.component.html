@@ -1,0 +1,10 @@
+<h2>Invoice Preview</h2>
+<p>Customer Name: {{ invoice?.customerName }}</p>
+
+<div *ngFor="let item of invoice?.items">
+  <p>{{ item.description }} - Qty: {{ item.quantity }} - Price: {{ item.price | currency }}</p>
+</div>
+
+<p>Subtotal: {{ invoice?.subtotal | currency }}</p>
+<p>Tax ({{ invoice?.taxRate }}%): {{ invoice?.taxAmount | currency }}</p>
+<p>Total: {{ invoice?.total | currency }}</p>

@@ -1,0 +1,30 @@
+<h2>Create New Invoice</h2>
+<form (ngSubmit)="createInvoice()">
+  <div>
+    <label>Customer Name:</label>
+    <input [(ngModel)]="invoice.customerName" name="customerName" required />
+  </div>
+
+  <div *ngFor="let item of invoice.items; let i = index">
+    <label>Item {{ i + 1 }}:</label>
+    <input [(ngModel)]="item.description" placeholder="Description" name="description{{i}}" />
+    <input type="number" [(ngModel)]="item.quantity" placeholder="Quantity" name="quantity{{i}}" />
+    <input type="number" [(ngModel)]="item.price" placeholder="Price" name="price{{i}}" />
+  </div>
+
+  <button type="button" (click)="addItem()">Add Item</button>
+
+  <div>
+    <label>Tax Rate (%):</label>
+    <input type="number" [(ngModel)]="invoice.taxRate" name="taxRate" (input)="calculateTotals()" />
+  </div>
+
+  <div>
+    <p>Subtotal: {{ invoice.subtotal | currency }}</p>
+    <p>Tax: {{ invoice.taxAmount | currency }}</p>
+    <p>Total: {{ invoice.total | currency }}</p>
+  </div>
+
+  <button type="submit">Create Invoice</button>
+</form>
+
